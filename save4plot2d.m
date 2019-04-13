@@ -73,7 +73,7 @@
 %% --------------------------------------------------------
 function [s] = save4plot2d (filename, x, y, sx)
   if nargin < 3
-    error('Need more arguments: saveplot2d(filename, x, y, sx)');
+    error('Need more arguments: save4plot2d(filename, x, y, sx)');
   end
   
   if ~exist('sx', 'var')
@@ -105,7 +105,6 @@ function [s] = save4plot2d (filename, x, y, sx)
   fprintf(f, '\\begin{tikzpicture}\n');
  	fprintf(f, '  \\begin{axis}[\n');
  	fprintf(f, '    xlabel={$x$},\n');
- 	fprintf(f, '    ylabel={$y$},\n');
  	fprintf(f, '    ylabel={$y$},\n');
  	fprintf(f, '    xmin=%g, xmax=%g,\n', xs(1), xs(end));
  	fprintf(f, '  ]\n');
