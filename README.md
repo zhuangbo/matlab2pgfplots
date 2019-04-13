@@ -2,10 +2,9 @@
 
 > Save Matlab data for PGFPlots
 
-## Save data `(x,y)` for PGFPlot 2D
+Suppose you have data `(x,y)` or `(x,y,z)` in matlab. Now, you want to plot it in LaTeX using PGFPlots. This function will help you.
 
-Suppose you have data `y(x)` in matlab. Now, you want to plot it in LaTeX. First, you need save data to a text file with the right format. This function will
-help you.
+## Save data `(x,y)` for PGFPlot 2D
 
 ### Usage
 
@@ -48,8 +47,6 @@ save4plot2d('data2.txt', x, y, 1:5:101);
 ~~~~
 
 ## Save data `(x,y,z)` for PGFPlot 3D
-
-Suppose you have data `z(x,y)` in matlab. Now, you want to plot it in LaTeX. First, you need save data to a text file with the right format. This function will help you.
 
 ### Usage
 
