@@ -98,7 +98,7 @@ function [s] = save4plot2d (filename, x, y, sx)
     texfile = [path filesep name '.tex'];
   end
   f = fopen(texfile, 'w');
-  fprintf(f, '\\documentclass{article}\n');
+  fprintf(f, '\\documentclass{standalone}\n');
   fprintf(f, '\\usepackage{pgfplots}\n');
   fprintf(f, '\\begin{document}\n');
   fprintf(f, '\n');
