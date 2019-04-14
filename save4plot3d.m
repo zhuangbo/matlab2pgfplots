@@ -47,8 +47,10 @@
 % 
 %   x = linspace(0, 1, 101);
 %   y = linspace(-1, 1, 201);
-%   z = exp(-x'.^2 - y.^2);    % get z size 101 x 201
-%   
+%   z = exp(-x.^2 - y'.^2);    % get z size 201 x 101
+%   % Plot 3D surface in Matlab
+%   surf(x, y, z);
+%   % Save PGFPlot figure with data
 %   save4plot3d('data1.txt', x, y, z);
 %   save4plot3d('data2.txt', x, y, z, 1:5:101, 1:5:201);
 % 
@@ -75,7 +77,7 @@
 %% --------------------------------------------------------
 function [s] = save4plot3d (filename, x, y, z, sx, sy)
   if nargin < 4
-    error('Need more arguments: saveplot3d(filename, x, y, z, sx, sy)');
+    error('Need more arguments: save4plot3d(filename, x, y, z, sx, sy)');
   end
   
   if ~exist('sx', 'var')
@@ -110,7 +112,7 @@ function [s] = save4plot3d (filename, x, y, z, sx, sy)
     texfile = [path filesep name '.tex'];
   end
   f = fopen(texfile, 'w');
-  fprintf(f, '\\documentclass{standalone}\n');
+  fprintf(f, '\\documentclass{article}\n');
   fprintf(f, '\\usepackage{pgfplots}\n');
   fprintf(f, '\\begin{document}\n');
   fprintf(f, '\n');

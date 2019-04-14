@@ -48,7 +48,9 @@
 % 
 %   x = linspace(0, 1, 101);
 %   y = sin(10*x);
-%   
+%   % Plot in Matlab
+%   plot(x, y);
+%   % Save PGFPlot figure with data
 %   save4plot2d('data1.txt', x, y);
 %   save4plot2d('data2.txt', x, y, 1:5:101);
 % 
@@ -98,7 +100,7 @@ function [s] = save4plot2d (filename, x, y, sx)
     texfile = [path filesep name '.tex'];
   end
   f = fopen(texfile, 'w');
-  fprintf(f, '\\documentclass{standalone}\n');
+  fprintf(f, '\\documentclass{article}\n');
   fprintf(f, '\\usepackage{pgfplots}\n');
   fprintf(f, '\\begin{document}\n');
   fprintf(f, '\n');
