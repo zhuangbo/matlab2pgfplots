@@ -21,7 +21,7 @@
 %  DEALINGS IN THE SOFTWARE.
 
 %% ========================================================
-%% Save data z(x,y) for PGFPlot 3D
+%% Save PGFPlot 3D figuer using data z(x,y)
 %% --------------------------------------------------------
 %
 % Suppose you have data z(x,y) in matlab.

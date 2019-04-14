@@ -4,7 +4,7 @@
 
 Suppose you have data `(x,y)` or `(x,y,z)` in Matlab. Now, you want to plot it in LaTeX using PGFPlots. These functions will help you.
 
-## Save data `(x,y)` for PGFPlot 2D
+## Save PGFPlots 2D figure using data `(x,y)`
 
 ### Usage
 
@@ -50,7 +50,7 @@ save4plot2d('data2.txt', x, y, 1:5:101);
 \end{document}
 ~~~~
 
-## Save data `(x,y,z)` for PGFPlot 3D
+## Save PGFPlots 3D figure using data `(x,y,z)`
 
 ### Usage
 

@@ -22,7 +22,7 @@
 
 
 %% ========================================================
-%% Save data y(x) for PGFPlot 2D
+%% Save PGFPlot 2D figure using data y(x)
 %% --------------------------------------------------------
 %
 % Suppose you have data y(x) in matlab.
