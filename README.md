@@ -105,3 +105,7 @@ save4plot3d('data2.txt', x, y, z, 1:5:101, 1:5:201);
 
 \end{document}
 ~~~~
+
+## License
+
+This project is licensed under the MIT License.
