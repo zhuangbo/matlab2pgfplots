@@ -68,10 +68,10 @@ save4plot2d('data2.txt', x, y, 1:5:101);
 ~~~~matlab
 x = linspace(0, 1, 101);
 y = linspace(-1, 1, 201);
-z = exp(-x.^2 - y'.^2);    % get z size 201 x 101
+z = exp(-x'.^2 - y.^2);    % get z(x,y) as 101 x 201 matrix
 
 % Plot 3D surface in Matlab
-surf(x, y, z);
+surf(x, y, z');
 
 % Save PGFPlot figure with data
 save4plot3d('data1.txt', x, y, z);
