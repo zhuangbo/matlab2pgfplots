@@ -4,6 +4,13 @@
 
 Suppose you have data `(x,y)` or `(x,y,z)` in Matlab. Now, you want to plot it in LaTeX using PGFPlots. These functions will help you.
 
+## Install
+
+1. Download ZIP.
+2. Extract it.
+3. Copy files `save4plot2d.m` and `save4plot3d.m` to your code path.
+4. Call functions `save4plot2d` or `save4plot3d` after your plot code.
+
 ## Save PGFPlots 2D figure using data `(x,y)`
 
 ### Usage
