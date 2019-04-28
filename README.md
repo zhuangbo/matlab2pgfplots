@@ -1,6 +1,6 @@
-# Save for Plot
+# Save to Plot
 
-> Save Matlab data for PGFPlots
+> Save Matlab data to PGFPlots
 
 Suppose you have data `(x,y)` or `(x,y,z)` in Matlab. Now, you want to plot it in LaTeX using PGFPlots. These functions will help you.
 
