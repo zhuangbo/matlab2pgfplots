@@ -11,5 +11,5 @@ z = exp(-x'.^2 - y.^2);    % get z(x,y) as 101 x 201 matrix
 surf(x, y, z');
 
 % Save PGFPlot figure with data
-save4plot3d('data1.txt', x, y, z);
-save4plot3d('data2.txt', x, y, z, 1:5:101, 1:5:201);
+saveplot3d('fig3', x, y, z);
+saveplot3d('fig4', x, y, z, 1:5:101, 1:5:201);

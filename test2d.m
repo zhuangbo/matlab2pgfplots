@@ -10,5 +10,5 @@ y = sin(10*x);
 plot(x, y);
 
 % Save PGFPlot figure with data
-save4plot2d('data1.txt', x, y);
-save4plot2d('data2.txt', x, y, 1:5:101);
+saveplot2d('fig1', x, y);
+saveplot2d('fig2', x, y, 1:5:101);

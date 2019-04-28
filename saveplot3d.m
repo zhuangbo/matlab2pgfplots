@@ -15,15 +15,15 @@
 % 
 %% Usage:
 % 
-% (1) save4plot3d ( datafilename, x, y, z )
+% (1) saveplot3d ( filename, x, y, z )
 % 
-%    Save all data from z(x,y) to datafilename,
-%    and create a .tex file in the same name.
+%    Save all data from z(x,y) to filename.txt,
+%    and LaTeX code to filename.tex.
 %    
-% (2) save4plot3d ( datafilename, x, y, z, sx, sy )
+% (2) saveplot3d ( filename, x, y, z, sx, sy )
 % 
-%    Save selected data from z(x,y) to datafilename,
-%    and create a .tex file in the same name.
+%    Save selected data from z(x,y) to filename.txt,
+%    and LaTeX code to filename.tex.
 %    Select x and y using sx and sy respectively.
 % 
 %% Example in Matlab:
@@ -34,8 +34,8 @@
 %   % Plot 3D surface in Matlab
 %   surf(x, y, z');
 %   % Save PGFPlot figure with data
-%   save4plot3d('data1.txt', x, y, z);
-%   save4plot3d('data2.txt', x, y, z, 1:5:101, 1:5:201);
+%   saveplot3d('fig3', x, y, z);
+%   saveplot3d('fig4', x, y, z, 1:5:101, 1:5:201);
 % 
 %% Example in LaTeX:
 % 
@@ -50,17 +50,17 @@
 % 	   zlabel={$z$},
 % 	   view={60}{30},
 % 	 ]
-% 	    \addplot3[surf, mesh/rows=101] table {data1.txt};
-% 	    % \addplot3[surf, mesh/rows=21] table {data2.txt};
+% 	    \addplot3[surf, mesh/rows=101] table {fig3.txt};
+% 	    % \addplot3[surf, mesh/rows=21] table {fig4.txt};
 % 	 \end{axis}
 %  \end{tikzpicture}
 % 
 %  \end{document}
 %
 %% --------------------------------------------------------
-function [s] = save4plot3d (filename, x, y, z, sx, sy)
+function [] = saveplot3d (filename, x, y, z, sx, sy)
   if nargin < 4
-    error('Need more arguments: save4plot3d(filename, x, y, z, sx, sy)');
+    error('Need more arguments: saveplot3d(filename, x, y, z, sx, sy)');
   end
   
   if ~exist('sx', 'var')
@@ -84,34 +84,35 @@ function [s] = save4plot3d (filename, x, y, z, sx, sy)
   % Convert data to column vectors
   M = [X(:) Y(:) Z(:)];
   
+  % Set filename
+  [path, name] = fileparts(filename);
+  texfile = fullfile(path, [name '.tex']);
+  datfile = fullfile(path, [name '.txt']);
+  
   % Save to text file
-  save(filename, 'M', '-ascii');
+  save(datfile, 'M', '-ascii');
   
   % Save LaTeX document template
-  [path, name] = fileparts(filename);
-  if strcmp(path, '')
-    texfile = [name '.tex'];
-  else
-    texfile = [path filesep name '.tex'];
-  end
   f = fopen(texfile, 'w');
-  fprintf(f, '\\documentclass{article}\n');
+  fprintf(f, '\\documentclass{standalone}\n');
   fprintf(f, '\\usepackage{pgfplots}\n');
   fprintf(f, '\\begin{document}\n');
   fprintf(f, '\n');
   fprintf(f, '\\begin{tikzpicture}\n');
- 	fprintf(f, '  \\begin{axis}[\n');
- 	fprintf(f, '    xlabel={$x$},\n');
- 	fprintf(f, '    ylabel={$y$},\n');
- 	fprintf(f, '    zlabel={$z$},\n');
-	fprintf(f, '    xmin=%g, xmax=%g,\n', xs(1), xs(end));
-	fprintf(f, '    ymin=%g, ymax=%g,\n', ys(1), ys(end));
- 	fprintf(f, '    view={60}{30},\n');
- 	fprintf(f, '  ]\n');
- 	fprintf(f, '    \\addplot3[surf, mesh/rows=%d] table {%s};\n', length(xs), filename);
- 	fprintf(f, '  \\end{axis}\n');
+  fprintf(f, '  \\begin{axis}[\n');
+  fprintf(f, '    xlabel={$x$},\n');
+  fprintf(f, '    ylabel={$y$},\n');
+  fprintf(f, '    zlabel={$z$},\n');
+  fprintf(f, '    xmin=%g, xmax=%g,\n', xs(1), xs(end));
+  fprintf(f, '    ymin=%g, ymax=%g,\n', ys(1), ys(end));
+  fprintf(f, '    view={60}{30},\n');
+  fprintf(f, '  ]\n');
+  fprintf(f, '    \\addplot3[surf, mesh/rows=%d] table {%s};\n', length(xs), datfile);
+  fprintf(f, '  \\end{axis}\n');
   fprintf(f, '\\end{tikzpicture}\n');
   fprintf(f, '\n');
   fprintf(f, '\\end{document}\n');
   fclose(f);
+  
+  fprintf('LaTeX figure saved in "%s" and "%s".\n', texfile, datfile);
 end

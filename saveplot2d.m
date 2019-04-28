@@ -16,15 +16,15 @@
 % 
 %% Usage:
 % 
-% (1) save4plot2d ( datafilename, x, y)
+% (1) saveplot2d ( filename, x, y)
 % 
-%    Save all data from y(x) to datafilename,
-%    and create a .tex file in the same name.
+%    Save all data from y(x) to filename.txt,
+%    and LaTeX code to filename.tex.
 %    
-% (2) save4plot2d ( datafilename, x, y, sx )
+% (2) saveplot2d ( filename, x, y, sx )
 % 
-%    Save selected data from y(x) to datafilename,
-%    and create a .tex file in the same name.
+%    Save selected data from y(x) to filename.txt,
+%    and LaTeX code to filename.tex.
 %    Select x using sx.
 % 
 %% Example in Matlab:
@@ -34,8 +34,8 @@
 %   % Plot in Matlab
 %   plot(x, y);
 %   % Save PGFPlot figure with data
-%   save4plot2d('data1.txt', x, y);
-%   save4plot2d('data2.txt', x, y, 1:5:101);
+%   saveplot2d('fig1', x, y);
+%   saveplot2d('fig2', x, y, 1:5:101);
 % 
 %% Example in LaTeX:
 % 
@@ -48,17 +48,17 @@
 % 	   xlabel={$x$},
 % 	   ylabel={$y$},
 % 	 ]
-% 	    \addplot[] table {data1.txt};
-% 	    % \addplot[] table {data2.txt};
+% 	    \addplot[] table {fig1.txt};
+% 	    % \addplot[] table {fig2.txt};
 % 	 \end{axis}
 %  \end{tikzpicture}
 % 
 %  \end{document}
 %
 %% --------------------------------------------------------
-function [s] = save4plot2d (filename, x, y, sx)
+function [] = saveplot2d (filename, x, y, sx)
   if nargin < 3
-    error('Need more arguments: save4plot2d(filename, x, y, sx)');
+    error('Need more arguments: saveplot2d(filename, x, y, sx)');
   end
   
   if ~exist('sx', 'var')
@@ -72,31 +72,32 @@ function [s] = save4plot2d (filename, x, y, sx)
   % Convert data to column vectors
   M = [xs(:) ys(:)];
   
-  % Save to text file
-  save(filename, 'M', '-ascii');
-
-  % Save LaTeX document template
+  % Set filename
   [path, name] = fileparts(filename);
-  if strcmp(path, '')
-    texfile = [name '.tex'];
-  else
-    texfile = [path filesep name '.tex'];
-  end
+  texfile = fullfile(path, [name '.tex']);
+  datfile = fullfile(path, [name '.txt']);
+  
+  % Save to text file
+  save(datfile, 'M', '-ascii');
+  
+  % Save LaTeX document template
   f = fopen(texfile, 'w');
-  fprintf(f, '\\documentclass{article}\n');
+  fprintf(f, '\\documentclass{standalone}\n');
   fprintf(f, '\\usepackage{pgfplots}\n');
   fprintf(f, '\\begin{document}\n');
   fprintf(f, '\n');
   fprintf(f, '\\begin{tikzpicture}\n');
- 	fprintf(f, '  \\begin{axis}[\n');
- 	fprintf(f, '    xlabel={$x$},\n');
- 	fprintf(f, '    ylabel={$y$},\n');
- 	fprintf(f, '    xmin=%g, xmax=%g,\n', xs(1), xs(end));
- 	fprintf(f, '  ]\n');
-  fprintf(f, '    \\addplot[] table {%s};\n', filename);
- 	fprintf(f, '  \\end{axis}\n');
+  fprintf(f, '  \\begin{axis}[\n');
+  fprintf(f, '    xlabel={$x$},\n');
+  fprintf(f, '    ylabel={$y$},\n');
+  fprintf(f, '    xmin=%g, xmax=%g,\n', xs(1), xs(end));
+  fprintf(f, '  ]\n');
+  fprintf(f, '    \\addplot[] table {%s};\n', datfile);
+  fprintf(f, '  \\end{axis}\n');
   fprintf(f, '\\end{tikzpicture}\n');
   fprintf(f, '\n');
   fprintf(f, '\\end{document}\n');
   fclose(f);
+  
+  fprintf('LaTeX figure saved in "%s" and "%s".\n', texfile, datfile);
 end
