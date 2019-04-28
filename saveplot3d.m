@@ -105,7 +105,7 @@ function [] = saveplot3d (filename, x, y, z, sx, sy)
   fprintf(f, '    zlabel={$z$},\n');
   fprintf(f, '    xmin=%g, xmax=%g,\n', xs(1), xs(end));
   fprintf(f, '    ymin=%g, ymax=%g,\n', ys(1), ys(end));
-  fprintf(f, '    view={60}{30},\n');
+  fprintf(f, '    view={-30}{30},\n');
   fprintf(f, '  ]\n');
   fprintf(f, '    \\addplot3[surf, mesh/rows=%d] table {%s};\n', length(xs), datfile);
   fprintf(f, '  \\end{axis}\n');
