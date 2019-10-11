@@ -107,7 +107,7 @@ function [] = saveplot3d (filename, x, y, z, sx, sy)
   fprintf(f, '    ymin=%g, ymax=%g,\n', ys(1), ys(end));
   fprintf(f, '    view={-30}{30},\n');
   fprintf(f, '  ]\n');
-  fprintf(f, '    \\addplot3[surf, mesh/rows=%d] table {%s};\n', length(xs), datfile);
+  fprintf(f, '    \\addplot3[surf, mesh/rows=%d] table {%s.txt};\n', length(xs), name);
   fprintf(f, '  \\end{axis}\n');
   fprintf(f, '\\end{tikzpicture}\n');
   fprintf(f, '\n');

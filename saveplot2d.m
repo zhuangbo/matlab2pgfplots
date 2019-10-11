@@ -92,7 +92,7 @@ function [] = saveplot2d (filename, x, y, sx)
   fprintf(f, '    ylabel={$y$},\n');
   fprintf(f, '    xmin=%g, xmax=%g,\n', xs(1), xs(end));
   fprintf(f, '  ]\n');
-  fprintf(f, '    \\addplot[] table {%s};\n', datfile);
+  fprintf(f, '    \\addplot[] table {%s.txt};\n', name);
   fprintf(f, '  \\end{axis}\n');
   fprintf(f, '\\end{tikzpicture}\n');
   fprintf(f, '\n');
